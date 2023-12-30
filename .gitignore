@@ -22,7 +22,7 @@ target
 .attach_pid*
 /.DS_Store
 **/.DS_Store
-
+*/META-INF/*
 
 # React
 # dependencies
