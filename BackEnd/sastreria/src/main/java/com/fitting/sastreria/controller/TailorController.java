@@ -1,7 +1,6 @@
 package com.fitting.sastreria.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,12 +67,12 @@ public class TailorController {
 		}
 		
 		@PatchMapping("/tailor/{tailorId}")
-		public ResponseEntity<Tailor> updateParcialTailor(@PathVariable String tailorId, @RequestBody Map<String, Object> tailorToUpdate) {
+		public ResponseEntity<Tailor> updateParcialTailor(@PathVariable String tailorId, @RequestBody CreateTailorRequest featuresUpdated) {
 			log.debug("Ejecucion updateParcialTailor");
-			Tailor modifiedTailor = service.updatePartialTailor(tailorId, tailorToUpdate);
+			Tailor findTailor = service.getATailor(tailorId);
 
-			if (modifiedTailor != null) {
-				return ResponseEntity.status(HttpStatus.OK).body(modifiedTailor);
+			if (findTailor != null) {				
+				return ResponseEntity.status(HttpStatus.OK).body(service.updatePartialTailor(findTailor, featuresUpdated));
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			}

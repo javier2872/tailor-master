@@ -1,9 +1,6 @@
 package com.fitting.sastreria.service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,26 +62,15 @@ public class TailorServiceImpl implements TailorService{
 	}
 
 	@Override
-	public Tailor updatePartialTailor(String tailorId, Map<String, Object> tailorToUpdate) {
-
-		if (getATailor(tailorId)!=null ) {					
-			Tailor tailor = repository.getReferenceById(Long.valueOf(tailorId));	
-	        for (Entry<String, Object> entry : tailorToUpdate.entrySet()) {
-	        	if(entry.getKey().equals("availability")) {
-	        		tailor.setAvailability((List<String>) entry.getValue());
-	        	}
-	        	if(entry.getKey().equals("specialties")) {
-	        		List<Map<String, String>> source = (List<Map<String, String>>) entry.getValue();
-	        		List<Specialties> result = source.stream()
-	        	            .map(map -> new Specialties(map.get("name"), map.get("price")))
-	        	            .collect(Collectors.toList());
-	        		tailor.setSpecialties(result);       			
-	        	}
-	        }
-			return repository.save(tailor);
-		} else {
-			return null;
+	public Tailor updatePartialTailor(Tailor tailor, CreateTailorRequest featuresUpdated) {
+		if(featuresUpdated.getSpecialties()!=null) {
+			tailor.setSpecialties(featuresUpdated.getSpecialties());
+		}			
+		if(featuresUpdated.getAvailability()!=null) {
+			tailor.setAvailability(featuresUpdated.getAvailability());
 		}
+		return repository.save(tailor);
+
 	}
 
 	@Override

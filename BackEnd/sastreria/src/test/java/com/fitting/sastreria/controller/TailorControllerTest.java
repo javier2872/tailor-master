@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = TailorController.class)
-public class TailorControllerTest {
+class TailorControllerTest {
 	
 	@Autowired
     private MockMvc mockMvc;

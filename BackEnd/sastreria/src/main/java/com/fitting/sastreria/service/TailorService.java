@@ -1,7 +1,6 @@
 package com.fitting.sastreria.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fitting.sastreria.model.pojo.Tailor;
 import com.fitting.sastreria.model.request.CreateTailorRequest;
@@ -29,7 +28,7 @@ public interface TailorService {
 	 * @param changes
 	 * @return a Tailor updated, if not return null
 	 */
-	Tailor updateATailor(Tailor tailorId, CreateTailorRequest tailorToUpdate);
+	Tailor updateATailor(Tailor tailorId, CreateTailorRequest featuresUpdated);
 	
 	/**
 	 * Update Tailor the attributes availability or specialties or price
@@ -37,7 +36,7 @@ public interface TailorService {
 	 * @param changes in availability, specialties, and price
 	 * @return a Tailor updated, if not return null
 	 */
-	Tailor updatePartialTailor(String tailorId, Map<String, Object> tailorToUpdate);
+	Tailor updatePartialTailor(Tailor tailorId, CreateTailorRequest tailorToUpdate);
 	
 	/**
 	 * get a list with all Tailor
