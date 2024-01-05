@@ -49,27 +49,27 @@ public class TailorServiceImpl implements TailorService{
 	}
 
 	@Override
-	public Tailor updateATailor(Tailor findTailor , CreateTailorRequest tailorToUpdate) {	
+	public Tailor updateATailor(Tailor tailorToUpdate , CreateTailorRequest featuresUpdated) {	
 		
-			Tailor tailors = repository.getReferenceById(findTailor.getId());	
-			tailors.setName(tailorToUpdate.getName());
-			tailors.setDescription(tailorToUpdate.getDescription());
-			tailors.setSpecialties(tailorToUpdate.getSpecialties());
-			tailors.setAvailability(tailorToUpdate.getAvailability());
+			Tailor tailors = repository.getReferenceById(tailorToUpdate.getId());	
+			tailors.setName(featuresUpdated.getName());
+			tailors.setDescription(featuresUpdated.getDescription());
+			tailors.setSpecialties(featuresUpdated.getSpecialties());
+			tailors.setAvailability(featuresUpdated.getAvailability());
 
 			return repository.save(tailors);
 	
 	}
 
 	@Override
-	public Tailor updatePartialTailor(Tailor tailor, CreateTailorRequest featuresUpdated) {
+	public Tailor updatePartialTailor(Tailor tailorToUpdate, CreateTailorRequest featuresUpdated) {
 		if(featuresUpdated.getSpecialties()!=null) {
-			tailor.setSpecialties(featuresUpdated.getSpecialties());
+			tailorToUpdate.setSpecialties(featuresUpdated.getSpecialties());
 		}			
 		if(featuresUpdated.getAvailability()!=null) {
-			tailor.setAvailability(featuresUpdated.getAvailability());
+			tailorToUpdate.setAvailability(featuresUpdated.getAvailability());
 		}
-		return repository.save(tailor);
+		return repository.save(tailorToUpdate);
 
 	}
 

@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-
 import com.fitting.trabajo.utils.Order;
 
 import lombok.AllArgsConstructor;
@@ -25,10 +24,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Defining a jop
+ * Defining a job
  */
 @Entity
-@Table(name = "jop")
+@Table(name = "job")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -36,17 +35,17 @@ import lombok.ToString;
 @Builder
 @ToString
 public class Job {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name = "idTailor")
-	private String idTailor;
-	
+
+	@Column(name = "tailorNumber")
+	private String tailorNumber;
+
 	@Column(name = "date")
 	private String date;
-	
+
 	@Column(name = "totalPrice")
 	private String totalPrice;
 	

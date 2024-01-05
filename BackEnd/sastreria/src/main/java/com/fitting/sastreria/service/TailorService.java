@@ -28,7 +28,7 @@ public interface TailorService {
 	 * @param changes
 	 * @return a Tailor updated, if not return null
 	 */
-	Tailor updateATailor(Tailor tailorId, CreateTailorRequest featuresUpdated);
+	Tailor updateATailor(Tailor tailorToUpdate, CreateTailorRequest featuresUpdated);
 	
 	/**
 	 * Update Tailor the attributes availability or specialties or price
@@ -36,7 +36,7 @@ public interface TailorService {
 	 * @param changes in availability, specialties, and price
 	 * @return a Tailor updated, if not return null
 	 */
-	Tailor updatePartialTailor(Tailor tailorId, CreateTailorRequest tailorToUpdate);
+	Tailor updatePartialTailor(Tailor tailorToUpdate, CreateTailorRequest featuresUpdated);
 	
 	/**
 	 * get a list with all Tailor

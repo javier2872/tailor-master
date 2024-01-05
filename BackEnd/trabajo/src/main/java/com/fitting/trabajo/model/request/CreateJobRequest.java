@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateJobRequest {
-	
+
 	private String idTailor;
 	private String date;
 	private List<Order> order;

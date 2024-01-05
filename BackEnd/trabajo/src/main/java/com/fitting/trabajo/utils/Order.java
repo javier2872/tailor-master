@@ -1,7 +1,6 @@
 package com.fitting.trabajo.utils;
 
 import javax.persistence.Embeddable;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
