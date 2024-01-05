@@ -1,8 +1,8 @@
 package com.fitting.sastreria.model.request;
 
-import java.util.Set;
+import java.util.List;
 
-import com.fitting.sastreria.utils.Availability;
+import com.fitting.sastreria.model.pojo.Tailor;
 import com.fitting.sastreria.utils.Specialties;
 
 import lombok.AllArgsConstructor;
@@ -18,11 +18,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateTailorRequest {
-	private String typeService;
+public class CreateTailorRequest extends Tailor{
 	private String name;
-	private String price;
-	private String opinion;
-	private Set<Specialties> specialties;
-	private Set<Availability> availability;
+	private String description;
+	private List<Specialties> specialties;
+	private List<String> availability;
 }

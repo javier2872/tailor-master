@@ -1,108 +1,82 @@
 package com.fitting.sastreria.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fitting.sastreria.model.pojo.Tailor;
 import com.fitting.sastreria.model.request.CreateTailorRequest;
+import com.fitting.sastreria.utils.Specialties;
+
 
 public interface TailorService {
 
 	/**
 	 * save a Tailor
-	 * 
 	 * @param request of type CreateTailorRequest
-	 * @return a Tailor if request is not null, and CreateTailorRequest attributes
-	 *         are not null .
+	 * @return a Tailor if request is not null, and CreateTailorRequest attributes are not null .
 	 */
 	Tailor createTailor(CreateTailorRequest tailorRequest);
-
+	
 	/**
 	 * delete a Tailor
-	 * 
 	 * @param id of the Tailor
-	 * @return true if the Tailor is deleted, else false
 	 */
-	Boolean deleteATailor(String tailorId);
-
+	void deleteATailor(Long tailorId);
+	
 	/**
 	 * Update an all Tailor
-	 * 
-	 * @param string  of the Tailor to update
+	 * @param Tailor of the Tailor to update
 	 * @param changes
 	 * @return a Tailor updated, if not return null
 	 */
-	Tailor updateATailor(String tailorId, CreateTailorRequest tailorToUpdate);
-
+	Tailor updateATailor(Tailor tailorId, CreateTailorRequest featuresUpdated);
+	
 	/**
 	 * Update Tailor the attributes availability or specialties or price
-	 * 
-	 * @param string  of the Tailor to update
+	 * @param string of the Tailor to update
 	 * @param changes in availability, specialties, and price
 	 * @return a Tailor updated, if not return null
 	 */
-	Tailor updatePartialTailor(String tailorId, Map<String, Object> tailorToUpdate);
-
+	Tailor updatePartialTailor(Tailor tailorId, CreateTailorRequest tailorToUpdate);
+	
 	/**
 	 * get a list with all Tailor
-	 * 
 	 * @return a list with all entities, if not return null
 	 */
 	List<Tailor> getAllTailor();
-
+	
 	/**
 	 * get a Tailor
-	 * 
 	 * @param id of the Tailor
 	 * @return a Tailor if it found it else return null.
 	 */
-	Tailor getATailor(String tailorId);
-
+	Tailor getATailor(String tailorId);	
+	
+		
 	/**
-	 * get an list of Tailor with the same typeService
-	 * 
-	 * @param string to find
-	 * @return a list with all Tailor, if not return null
+	 * find tailor's name
+	 * @param id of the Tailor
+	 * @return a String with name.
 	 */
-	List<Tailor> getTailorByTypeService(String typeService);
-
+	String getNameTailor(String tailorId);
+	
 	/**
-	 * get an list of Tailor with the same name
-	 * 
-	 * @param string to find
-	 * @return a list with all Tailor, if not return null
+	 * find tailor's description
+	 * @param id of the Tailor
+	 * @return a String with description.
 	 */
-	List<Tailor> getTailorByName(String name);
-
+	String getDescriptionTailor(String tailorId);
+	
 	/**
-	 * get an list of Tailor with the same price
-	 * 
-	 * @param string to find
-	 * @return a list with all Tailor, if not return null
+	 * find tailor's Specialties
+	 * @param id of the Tailor
+	 * @return a List with all Specialties.
 	 */
-	List<Tailor> getTailorByPrice(String price);
-
+	List<Specialties> getSpecialtiesTailor(String tailorId);
+	
 	/**
-	 * get an list of Tailor with the same opinion
-	 * 
-	 * @param string to find
-	 * @return a list with all Tailor, if not return null
+	 * find tailor's Availability
+	 * @param id of the Tailor
+	 * @return a List with all Availability.
 	 */
-	List<Tailor> getTailorByOpinion(String opinion);
-
-	/**
-	 * get an list of Tailor with the same name of specialties
-	 * 
-	 * @param string to find
-	 * @return a list with all Tailor, if not return null
-	 */
-	List<Tailor> getTailorBySpecialties(String nameSpecialties);
-
-	/**
-	 * get an list of Tailor with the same availability
-	 * 
-	 * @param string to find
-	 * @return a list with all Tailor, if not return null
-	 */
-	List<Tailor> getTailorByAvailability(String dateAvailability);
+	List<String> getAvailabilityTailor(String tailorId);	
 }

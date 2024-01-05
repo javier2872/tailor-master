@@ -1,13 +1,13 @@
 package com.fitting.sastreria.model.pojo;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fitting.sastreria.utils.Availability;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,33 +35,30 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-
 public class Tailor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Column(name = "typeService")
-	private String typeService;
-
+		
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "description")
+	private String description;
+	
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "tailor_specialties", joinColumns = @JoinColumn(name = "id_tailor"))
+    @AttributeOverrides({
+            @AttributeOverride(name = "name", column = @Column(name = "name")),
+            @AttributeOverride(name = "price", column = @Column(name = "price"))
+    })
+	private List<Specialties> specialties;
+	
 
-	@Column(name = "price")
-	private String price;
-
-	@Column(name = "opinion")
-	private String opinion;
-
-	@JsonManagedReference
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "tailorId")
-	private Set<Availability> availability;
-
-	@JsonManagedReference
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "tailorId")
-	private Set<Specialties> specialties;
+    @ElementCollection
+    @CollectionTable(name = "tailor_availability", joinColumns = @JoinColumn(name = "id_tailor"))
+    @Column(name = "availability")
+	private List<String> availability;
 
 }
