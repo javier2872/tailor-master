@@ -1,7 +1,6 @@
 package com.fitting.trabajo.facade;
 
 import java.net.URI;
-import java.util.List;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
