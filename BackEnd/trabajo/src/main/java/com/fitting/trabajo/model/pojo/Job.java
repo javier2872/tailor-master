@@ -14,7 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import com.fitting.trabajo.utils.Order;
+
+import com.fitting.trabajo.utils.Client;
+import com.fitting.trabajo.utils.Item;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,13 +50,19 @@ public class Job {
 
 	@Column(name = "totalPrice")
 	private String totalPrice;
-	
+		
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "job_order", joinColumns = @JoinColumn(name = "id_job"))
+    @CollectionTable(name = "job_item", joinColumns = @JoinColumn(name = "id_job"))
     @AttributeOverrides({
             @AttributeOverride(name = "name", column = @Column(name = "name")),
             @AttributeOverride(name = "number", column = @Column(name = "number"))
     })
-	private List<Order> order;
-
+	private List<Item> item;
+    
+    @ElementCollection(fetch = FetchType.LAZY)
+		    @CollectionTable(name = "job_client", joinColumns = @JoinColumn(name = "id_job"))
+    @AttributeOverrides({
+        @AttributeOverride(name = "name", column = @Column(name = "name")),
+})
+			private List<Client> client;
 }

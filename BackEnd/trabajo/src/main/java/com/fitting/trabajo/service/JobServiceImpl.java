@@ -13,7 +13,7 @@ import com.fitting.trabajo.data.JobRepository;
 import com.fitting.trabajo.facade.TailorFacade;
 import com.fitting.trabajo.model.pojo.Job;
 import com.fitting.trabajo.model.request.CreateJobRequest;
-import com.fitting.trabajo.utils.Order;
+import com.fitting.trabajo.utils.Item;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -27,10 +27,10 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public Job createJob(CreateJobRequest jobRequest) {
 		Tailor tailor = tailorFacade.getTailor(jobRequest.getIdTailor());
-		List<Order> order = jobRequest.getOrder();
+		List<Item> item = jobRequest.getItem();
 		List<Specialties> specialties = tailor.getSpecialties();
 		double totalPrice = 0.0;
-		for (Order one : order) {
+		for (Item one : item) {
 			for (Specialties two : specialties) {
 				if (one.getName().equals(two.getName())) {
 					totalPrice = (totalPrice + Double.valueOf(two.getPrice().replace(",", ".")))
@@ -46,7 +46,9 @@ public class JobServiceImpl implements JobService {
 				Job job = Job.builder().tailorNumber(jobRequest.getIdTailor()).date(dateToReserve)
 						.totalPrice(
 								String.format("%.2f", totalPrice ))
-						.order(order).build();
+						.item(item)
+						.client(jobRequest.getClient())
+						.build();
 				tailorAvailability.remove(dateA);
 				CreateTailorRequest tailorRequest = new CreateTailorRequest();
 				tailorRequest.setAvailability(tailorAvailability);
@@ -88,8 +90,8 @@ public class JobServiceImpl implements JobService {
 		if(featuresUpdated.getDate()!=null) {
 			jobToUpdate.setDate(featuresUpdated.getDate());
 		}			
-		if(featuresUpdated.getOrder()!=null) {
-			jobToUpdate.setOrder(featuresUpdated.getOrder());
+		if(featuresUpdated.getItem()!=null) {
+			jobToUpdate.setItem(featuresUpdated.getItem());
 		}
 		
 		return repository.save(jobToUpdate);
