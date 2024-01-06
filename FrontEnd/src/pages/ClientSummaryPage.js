@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }  from "react";
 import { NavBar } from "../components/NavBar";
 import { useParams, useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
@@ -7,7 +7,9 @@ import data from "../resources/client_data.json";
 export const ClientSummaryPage = () => {
   //hook para el boton back
   const navigate = useNavigate();
-
+  
+  const [inputValue, setInputValue] = useState('');
+  
   // constantes que nos ayudaran a poder mostrar toda la información que necesitamos para mostrar el resumen de todo el pedido
   const { id } = useParams();
   const itemsOrder = [];
@@ -75,12 +77,22 @@ export const ClientSummaryPage = () => {
         </tbody>
       </table>
       </div>
+      <div className="was-validated container">
+        <label for="name" class="form-label" >Name Client</label>
+        <input type="text" class="form-control" id="name"  placeholder="Name" onChange={(e) => setInputValue(e.target.value)} required/>
+        <div class="valid-feedback">Valido</div>
+        <div class="invalid-feedback">Por favor rellena este campo</div>
+      </div>
+
+
       <div className="container">
       <button
+        id="button-finalizar"
         type="button"
         className="btn btn-success"
         data-bs-toggle="modal"
         data-bs-target="#finishModal"
+        disabled={inputValue.length === 0}
       >
         Finalizar
       </button>
