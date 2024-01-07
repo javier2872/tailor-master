@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import data from "../resources/client_data.json";
+import data from "../resources/tailor_data.json";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { TablePrice } from "../components/TablePrice";
 import { NavBar } from "../components/NavBar";
@@ -9,11 +9,11 @@ import { useStorageMemory } from "../hooks/useStorageMemory";
 export const ClientDetailsPage = () => {
   //hook para el boton back
   const navigate = useNavigate();
-  //obtener los datos un cliente en expecifico
+  //obtener los datos un tailor en expecifico
   const { id } = useParams();
-  const client = data.filter((dataItem) => dataItem.id == id);
-  const clientSearched = (ListClientID) => {
-    return ListClientID.filter((item) => item.id == id).map(
+  const tailor = data.filter((dataItem) => dataItem.id === id);
+  const tailorSearched = (ListTailorID) => {
+    return ListTailorID.filter((item) => item.id === id).map(
       (obj) => (obj = obj.availability)
     );
   };
@@ -60,14 +60,12 @@ export const ClientDetailsPage = () => {
         Go Back
       </button>
       <div className="container">
-        {client?.map((detailsClient) => (
-          <div key={detailsClient.id}>
-            <div>Nombre {detailsClient.name}</div>
-            <div>Tipo {detailsClient.type}</div>
-            <div>Precio {detailsClient.price}&#8364;</div>
+        {tailor?.map((detailsTailor) => (
+          <div key={detailsTailor.id}>
+            <div>Nombre {detailsTailor.name}</div>
             <div>
               <TablePrice
-                specialties={detailsClient.specialties}
+                specialties={detailsTailor.specialties}
                 addNewItem={addNewItem}
               ></TablePrice>
             </div>
@@ -76,7 +74,7 @@ export const ClientDetailsPage = () => {
       </div>
       <div className="container">
         <TableSchedule
-          schedule={clientSearched(data)[0]}
+          schedule={tailorSearched(data)[0]}
           addNewdate={addNewdate}
         ></TableSchedule>
       </div>

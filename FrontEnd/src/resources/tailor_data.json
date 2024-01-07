@@ -1,9 +1,7 @@
 [
 {
     "id": 1,
-    "type":"Profesional",
     "name":"A",
-    "price":"100",
     "description":"Los sastres confeccionan por encargo prendas a medida cosidas a mano. También hacen arreglos a prendas como trajes y abrigos. La ropa de caballero constituye la mayor parte del sector, aunque también existe demanda de algunas prendas a medida para señora.",
     "specialties":[
         {
@@ -24,9 +22,7 @@
 },
 {
     "id": 2,
-    "type":"Empresa",
     "name":"B",
-    "price":"98",
     "description":"Si se acepta el presupuesto, el diseño se convierte entonces en patrón de papel o cartón, que se usa de plantilla para cortar la tela elegida. También se tienen que cortar con precisión los forros y cintas que dan forma a la ropa.",
     "specialties":[
         {
@@ -43,9 +39,7 @@
 },
 {
     "id": 3,
-    "type":"Empresa",
     "name":"C",
-    "price":"101",
     "description":"Los sastres son responsables de construir, alterar, reparar o modificar las prendas para los clientes según sus especificaciones, necesidades y preferencias. Toman las medidas de los clientes, ayudan en la selección de telas y organizan los ajustes para determinar si se necesitan ajustes adicionales.",
     "specialties":[
         {
@@ -62,9 +56,7 @@
 },
 {
     "id": 4,
-    "type":"Empresa",
     "name":"D",
-    "price":"101",
     "description":"Un sastre es un sastre y un vendedor con nociones de costura es un vendedor con nociones de costura. Su capacitación y experiencia difieren en la misma medida que tienen que hacer los precios que uno y otro cobran por su trabajo",
     "specialties":[
         {

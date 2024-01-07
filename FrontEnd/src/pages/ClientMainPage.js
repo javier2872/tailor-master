@@ -3,25 +3,25 @@ import { ClientTable } from "../components/ClientTable";
 import { SortBy } from "../components/SortBy";
 import { NavBar } from "../components/NavBar";
 
-import data from "../resources/client_data.json";
+import data from "../resources/tailor_data.json";
 
 export const ClientMainPage = () => {
   // configuración del hooks useState
-  const [dataClients, setDataClients] = useState(data);
+  const [dataTailors, setDataTailors] = useState(data);
   //hook para el valor por el que se ordena
   const [sortItems, setSortItems] = useState("none");
 
   const sortByNameItems = (sortItems) => {
     const options = {
-      asc: [...dataClients].sort((a, b) => (a.name < b.name ? -1 : 1)),
-      desc: [...dataClients].sort((a, b) => (a.name < b.name ? 1 : -1)),
-      none: [...dataClients],
+      asc: [...dataTailors].sort((a, b) => (a.name < b.name ? -1 : 1)),
+      desc: [...dataTailors].sort((a, b) => (a.name < b.name ? 1 : -1)),
+      none: [...dataTailors],
     };
     return options[sortItems];
   };
 
   useEffect(() => {
-    setDataClients(sortByNameItems(sortItems));
+    setDataTailors(sortByNameItems(sortItems));
   }, [sortItems]);
 
   return (
@@ -29,7 +29,7 @@ export const ClientMainPage = () => {
       <NavBar>
         <SortBy sortItems={(sortItems) => setSortItems(sortItems)}></SortBy>
       </NavBar>
-      <ClientTable clients={dataClients}></ClientTable>
+      <ClientTable tailors={dataTailors}></ClientTable>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ModalLogin } from "../components/ModalLogin";
 
@@ -17,9 +17,11 @@ export const MainPage = () => {
               <button>Cliente</button>
             </Link>
           </div>
-          <div className="mb-3" >
-              <button type="button" id="button-login-tailor" onClick={toggleOpen} >Sastre/a</button>
-              {showModal && <ModalLogin functions={[showModal, setShowModal]}  />}
+          <div className="mb-3">
+            <button type="button" id="button-login-tailor" onClick={toggleOpen}>
+              Sastre/a
+            </button>
+            {showModal && <ModalLogin functions={[showModal, setShowModal]} />}
           </div>
         </form>
       </div>

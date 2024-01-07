@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 
-import data from "../resources/client_data.json";
+import data from "../resources/tailor_data.json";
 
 export const TailorPage = () => {
   const [dataTailor, setDataTailor] = useState(data);
 
-  const [searchTailor, setSearchTailor] = useState(JSON.parse(sessionStorage.getItem('tailor')));
+  const [searchTailor, setSearchTailor] = useState(
+    JSON.parse(sessionStorage.getItem("tailor"))
+  );
 
   const [showTable, setShowTable] = useState(false);
 
-  const filteredTailors = dataTailor.find((tailor) => tailor.id.toString().toLowerCase()===searchTailor.toLowerCase());
+  const filteredTailors = dataTailor.find(
+    (tailor) =>
+      tailor.id.toString().toLowerCase() === searchTailor.toLowerCase()
+  );
 
   useEffect(() => {
-    filteredTailors? setShowTable(!showTable): setShowTable(showTable); 
+    filteredTailors ? setShowTable(!showTable) : setShowTable(showTable);
   }, [filteredTailors]);
 
   const Results = () => (
@@ -45,8 +50,13 @@ export const TailorPage = () => {
             ))}
             <tr>
               <th scope="row"></th>
-              <td> <input></input></td>
-              <td><input></input></td>
+              <td>
+                {" "}
+                <input></input>
+              </td>
+              <td>
+                <input></input>
+              </td>
               <td>
                 <button type="button" class="btn btn-dark">
                   Añadir
@@ -82,7 +92,9 @@ export const TailorPage = () => {
             ))}
             <tr>
               <th scope="row"></th>
-              <th><input></input></th>
+              <th>
+                <input></input>
+              </th>
               <th>
                 <button type="button" class="btn btn-dark">
                   Añadir
@@ -92,8 +104,8 @@ export const TailorPage = () => {
           </tbody>
         </table>
       </div>
-      <div className="container"> 
-      <table className="table table-success table-striped">
+      <div className="container">
+        <table className="table table-success table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -103,7 +115,7 @@ export const TailorPage = () => {
           </thead>
           <tbody>
             <tr>
-            <th scope="col">#</th>
+              <th scope="col">#</th>
               <th scope="col">Trabajo</th>
               <th scope="col">Fecha</th>
             </tr>
@@ -111,13 +123,14 @@ export const TailorPage = () => {
         </table>
       </div>
     </div>
-    
   );
 
   return (
     <section className="garamond">
       <div className="navy georgia ma0 grow">
-        <h2 className="f2">TAILOR - ID: {JSON.parse(sessionStorage.getItem('tailor'))}</h2>
+        <h2 className="f2">
+          TAILOR - ID: {JSON.parse(sessionStorage.getItem("tailor"))}
+        </h2>
       </div>
       <div className="container">{showTable && <Results />}</div>
     </section>
