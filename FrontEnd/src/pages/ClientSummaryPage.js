@@ -8,6 +8,7 @@ export const ClientSummaryPage = () => {
   //hook para el boton back
   const navigate = useNavigate();
   
+  //Bloquea el boton de finalizar pedido
   const [inputValue, setInputValue] = useState('');
   
   // constantes que nos ayudaran a poder mostrar toda la información que necesitamos para mostrar el resumen de todo el pedido
