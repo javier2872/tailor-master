@@ -11,9 +11,9 @@ export const ClientDetailsPage = () => {
   const navigate = useNavigate();
   //obtener los datos un tailor en expecifico
   const { id } = useParams();
-  const tailor = data.filter((dataItem) => dataItem.id === id);
+  const tailor = data.filter((dataItem) => dataItem.id == id);
   const tailorSearched = (ListTailorID) => {
-    return ListTailorID.filter((item) => item.id === id).map(
+    return ListTailorID.filter((item) => item.id == id).map(
       (obj) => (obj = obj.availability)
     );
   };
@@ -23,7 +23,7 @@ export const ClientDetailsPage = () => {
   const [selectedDate, setSelectedDate] = useState("");
   // aqui se controla que solo haya un numero de pedido por item
   const addNewItem = (itemName, number) => {
-    if (orderItem.find((it) => it.name === itemName)) {
+    if (orderItem.find((it) => it.name == itemName)) {
       orderItem.map((item) => {
         if (item.name === itemName) {
           item.total = number;
