@@ -1,7 +1,6 @@
 package com.fitting.trabajo.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.fitting.trabajo.model.pojo.Job;
 import com.fitting.trabajo.model.request.CreateJobRequest;
@@ -25,10 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class JobController {
-	
+
 	private final JobService service;
-	
-	
+
 	@PostMapping("/job")
 	public ResponseEntity<Job> postJob(@RequestBody CreateJobRequest jobRequest) {
 		log.debug("Ejecucion postJob");
@@ -40,19 +37,20 @@ public class JobController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 
-
 	}
-	
+
 	@DeleteMapping("/job/{jobId}")
 	public ResponseEntity<Job> deleteAJob(@PathVariable String jobId) {
 		log.debug("Ejecucion deleteAJob");
-		if (service.deleteAJob(jobId)) {
+		Job findJob = service.getAJob(jobId);
+		if (findJob!=null) {
+			service.deleteAJob(findJob.getId());
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
-	
+
 	@GetMapping("/job")
 	public ResponseEntity<List<Job>> getAllJob() {
 		log.debug("Ejecucion getAllTailors");
@@ -64,8 +62,7 @@ public class JobController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
-	
-	
+
 	@GetMapping("/job/{jobId}")
 	public ResponseEntity<Job> getJob(@PathVariable String jobId) {
 		log.debug("Ejecucion getTailor");
@@ -78,7 +75,7 @@ public class JobController {
 		}
 
 	}
-	
+
 	@GetMapping("/job/tailor/{tailorId}")
 	public ResponseEntity<List<Job>> getJobOfTailor(@PathVariable String tailorId) {
 		log.debug("Ejecucion getTailor");
@@ -91,21 +88,17 @@ public class JobController {
 		}
 
 	}
-	
-	@PatchMapping("/job/{tailorId}")
-	public ResponseEntity<Job> updateParcialJob(@PathVariable String jobId, @RequestBody Map<String, Object> jobToUpdate) {
-		log.debug("Ejecucion updateParcialTailor");
-		Job modifiedJob = service.updatePartialJob(jobId, jobToUpdate);
 
-		if (modifiedJob != null) {
-			return ResponseEntity.status(HttpStatus.OK).body(modifiedJob);
+	@PatchMapping("/job/{tailorId}")
+	public ResponseEntity<Job> updateParcialJob(@PathVariable String jobId, @RequestBody CreateJobRequest featuresUpdated) {
+		log.debug("Ejecucion updateParcialTailor");
+		Job findJob = service.getAJob(jobId);
+		
+		if (findJob != null) {
+			return ResponseEntity.status(HttpStatus.OK).body(service.updatePartialJob(findJob, featuresUpdated));
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
-	}		
-	
-	
-
-	
+	}
 
 }

@@ -8,17 +8,18 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class TrabajoApplication {
-	
+
 	/**
 	 * Get a restTemplate for the HTTP request
+	 * 
 	 * @return
 	 */
 	@LoadBalanced
 	@Bean
 	public RestTemplate restTemplate() {
-	    return new RestTemplate();
+		return new RestTemplate();
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(TrabajoApplication.class, args);
 	}

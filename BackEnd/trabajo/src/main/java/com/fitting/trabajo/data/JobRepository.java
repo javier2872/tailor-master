@@ -9,10 +9,10 @@ import com.fitting.trabajo.model.pojo.Job;
 /**
  * searches in the jpaRepository
  */
-public interface JobRepository  extends JpaRepository<Job, Long>{
-	
+public interface JobRepository extends JpaRepository<Job, Long> {
+
 	Long deleteById(long id);
 
-	List<Job> findByIdTailor(String idTailor);
-	
+	List<Job> findByTailorNumber(String idTailor);
+
 }

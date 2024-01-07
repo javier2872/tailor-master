@@ -7,16 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * Specialties of a tailor service
- */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class Specialties {
+public class Client {
 	private String name;
-	private String price;
-
 }
