@@ -3,6 +3,7 @@ import { NavBar } from "../components/NavBar";
 import { useParams, useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import data from "../resources/client_data.json";
+import { useStorageMemory } from "../hooks/useStorageMemory";
 
 export const ClientSummaryPage = () => {
   //hook para el boton back
@@ -34,7 +35,14 @@ export const ClientSummaryPage = () => {
           parseInt(clientSpecialties[0][j].price) * parseInt(order[i].total);
       }
     }
-  }
+  };
+     //Hook que vamos a utilizar para nuestro custom hook
+     const [customHook, setCustomHook] = useStorageMemory(id, "");
+  const handleClick = () => {
+    const dataStorage = JSON.parse(localStorage.getItem(id));
+    dataStorage?.push({ client: inputValue });
+    setCustomHook(dataStorage);
+  };
 
   return (
     <div>
@@ -94,6 +102,7 @@ export const ClientSummaryPage = () => {
         data-bs-toggle="modal"
         data-bs-target="#finishModal"
         disabled={inputValue.length === 0}
+        onClick={() => {handleClick();}}
       >
         Finalizar
       </button>

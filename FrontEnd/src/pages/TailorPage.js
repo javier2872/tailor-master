@@ -5,26 +5,14 @@ import data from "../resources/client_data.json";
 export const TailorPage = () => {
   const [dataTailor, setDataTailor] = useState(data);
 
-  const [searchTailor, setSearchTailor] = useState("");
+  const [searchTailor, setSearchTailor] = useState(JSON.parse(sessionStorage.getItem('tailor')));
 
-  const [showTable, setShowTable] = useState();
+  const [showTable, setShowTable] = useState(false);
 
-  const filteredTailors = dataTailor.filter((tailor) => {
-    return tailor.id
-      .toString()
-      .toLowerCase()
-      .includes(searchTailor.toLowerCase());
-  });
-
-  const handleChange = (e) => {
-    setSearchTailor(e.target.value);
-    filteredTailors.length > 0
-      ? setShowTable(!showTable)
-      : setShowTable(showTable);
-  };
+  const filteredTailors = dataTailor.find((tailor) => tailor.id.toString().toLowerCase()===searchTailor.toLowerCase());
 
   useEffect(() => {
-    setSearchTailor("");
+    filteredTailors? setShowTable(!showTable): setShowTable(showTable); 
   }, [filteredTailors]);
 
   const Results = () => (
@@ -40,7 +28,7 @@ export const TailorPage = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredTailors[0].specialties?.map((specity, index) => (
+            {filteredTailors.specialties?.map((specity, index) => (
               <tr key={specity.name}>
                 <th scope="row">{index}</th>
                 <td>{specity.name}</td>
@@ -78,7 +66,7 @@ export const TailorPage = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredTailors[0].availability?.map((available, index) => (
+            {filteredTailors.availability?.map((available, index) => (
               <tr key={index}>
                 <th scope="row">{index}</th>
                 <td>{available}</td>
@@ -129,16 +117,7 @@ export const TailorPage = () => {
   return (
     <section className="garamond">
       <div className="navy georgia ma0 grow">
-        <h2 className="f2">TAILOR</h2>
-      </div>
-
-      <div className="pa2 container">
-        <input
-          className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
-          type="search"
-          placeholder="Buscar Sastre/a"
-          onChange={handleChange}
-        />
+        <h2 className="f2">TAILOR - ID: {JSON.parse(sessionStorage.getItem('tailor'))}</h2>
       </div>
       <div className="container">{showTable && <Results />}</div>
     </section>

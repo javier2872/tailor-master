@@ -9,7 +9,7 @@ const [tailor, setTailor] = useState("");
 
   //cuando accemos click, significa que ya hemos terminado y se guarda en memoria local
   const handleClick = () => {
-    localStorage.setItem('tailor', JSON.stringify(tailor));
+    sessionStorage.setItem('tailor', JSON.stringify(tailor));
   };
 
 
@@ -22,8 +22,8 @@ return (<div open={showModal} >
             <div className="modal-body">
             
                 <div className="form-group">
-                  <label htmlFor="inputUserName">Sastre</label>
-                  <input className="form-control" placeholder="Sastre" type="text" id="inputSastre" onChange={(e) => setTailor(e.target.value)}/>
+                  <label htmlFor="inputUserName">ID de Sastre</label>
+                  <input className="form-control" placeholder="ID de sastre" type="text" id="inputSastre" onChange={(e) => setTailor(e.target.value)}/>
                 </div>
               
             </div>
