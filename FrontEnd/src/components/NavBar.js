@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-export const NavBar = ({ children = "" }) => {
+export const NavBar = ({ children = "" ,title}) => {
   // definimos esta constante, para comprobar en que path estamos
   const location = useLocation();
   // hook para controlar si enseñamos los boton de busqueda, ya que solo se muestran en la pantalla principal
@@ -10,7 +10,7 @@ export const NavBar = ({ children = "" }) => {
   // Cuando se cargue la pagina comprobara y enseñara los searcher
   useEffect(() => {
     const re = /[a-z]+/;
-    setShowComponent(location.pathname.match(re) ? false : true);
+    setShowComponent(location.pathname.match(re) ? true : false);
   }, []);
 
   return (
@@ -20,7 +20,7 @@ export const NavBar = ({ children = "" }) => {
       </nav>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand fw-bold fs-3">Client</a>
+          <a className="navbar-brand fw-bold fs-3">{title}</a>
           <button
             className="navbar-toggler"
             type="button"

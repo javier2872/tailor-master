@@ -1,8 +1,7 @@
 import React from "react";
 import { Card } from "./Card";
-
 // extraemos la propiedad tailor
-export const ClientTable = ({ tailors }) => {
+export  const ClientTable = ({ tailors }) => {
   return (
     <div id="tailor_table" className="container bootstrap snippets bootdeys">
       <div className="row">

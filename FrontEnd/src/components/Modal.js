@@ -28,7 +28,7 @@ export const Modal = () => {
           </div>
           <div className="modal-body">
             <p>Gracias por confiar en nosotros.</p>
-            <p>En breves recibirá, más información.</p>
+            <p>En breve recibirá más información.</p>
           </div>
           <div className="modal-footer">
             <Link to={`/`}>
@@ -38,7 +38,7 @@ export const Modal = () => {
                 className="btn btn-success font-weight-bold"
                 data-bs-dismiss="modal"
               >
-                Ir
+                Aceptar
               </button>
             </Link>
           </div>

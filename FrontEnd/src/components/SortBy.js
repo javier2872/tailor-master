@@ -16,7 +16,7 @@ export const SortBy = ({ sortItems }) => {
         <option value="desc">Name(desc)</option>
         <option value="none">None</option>
       </select>
-      <label htmlFor="floatingSelect">Sort By</label>
+      <label htmlFor="floatingSelect">Ordenar por</label>
     </div>
   );
 };

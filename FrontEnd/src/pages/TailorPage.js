@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { NavBar } from "../components/NavBar";
 import data from "../resources/tailor_data.json";
 
 export const TailorPage = () => {
@@ -15,6 +15,8 @@ export const TailorPage = () => {
     (tailor) =>
       tailor.id.toString().toLowerCase() === searchTailor.toLowerCase()
   );
+
+  const title = "Sastre: ID-" + JSON.parse(sessionStorage.getItem("tailor"));
 
   useEffect(() => {
     filteredTailors ? setShowTable(!showTable) : setShowTable(showTable);
@@ -127,11 +129,7 @@ export const TailorPage = () => {
 
   return (
     <section className="garamond">
-      <div className="navy georgia ma0 grow">
-        <h2 className="f2">
-          TAILOR - ID: {JSON.parse(sessionStorage.getItem("tailor"))}
-        </h2>
-      </div>
+      <NavBar title= {title}></NavBar>
       <div className="container">{showTable && <Results />}</div>
     </section>
   );

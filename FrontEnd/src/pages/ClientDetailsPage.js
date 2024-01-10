@@ -55,7 +55,7 @@ export const ClientDetailsPage = () => {
 
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar title="Cliente"></NavBar>
       <button className="btn btn-success" onClick={() => navigate(-1)}>
         Go Back
       </button>
