@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import data from "../resources/tailor_data.json";
 import { useStorageMemory } from "../hooks/useStorageMemory";
+import {addJob}  from "../services/http.service";
 
 export const ClientSummaryPage = () => {
   //hook para el boton back
@@ -19,8 +20,8 @@ export const ClientSummaryPage = () => {
   const tailorName = tailor.map((details) => details.name);
   const tailorSpecialties = tailor.map((details) => details.specialties);
   const dataStorage = JSON.parse(localStorage.getItem(id));
-  const date = dataStorage.filter((item) => item.date).map((obj) => obj.date);
-  const order = dataStorage.filter((item) => item.name);
+  const date = []//dataStorage.filter((item) => item.date).map((obj) => obj.date);
+  const order = []//dataStorage.filter((item) => item.name);
   var total = 0;
   for (let i = 0; i < order.length; i++) {
     for (let j = 0; j < tailorSpecialties[0].length; j++) {
@@ -42,6 +43,7 @@ export const ClientSummaryPage = () => {
     const dataStorage = JSON.parse(localStorage.getItem(id));
     dataStorage?.push({ client: inputValue });
     setCustomHook(dataStorage);
+    addJob(dataStorage);
   };
 
   return (
@@ -87,19 +89,19 @@ export const ClientSummaryPage = () => {
         </table>
       </div>
       <div className="was-validated container">
-        <label for="name" class="form-label">
+        <label htmlFor="name" className="form-label">
           Name Client
         </label>
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="name"
           placeholder="Name"
           onChange={(e) => setInputValue(e.target.value)}
           required
         />
-        <div class="valid-feedback">Valido</div>
-        <div class="invalid-feedback">Por favor rellena este campo</div>
+        <div className="valid-feedback">Valido</div>
+        <div className="invalid-feedback">Por favor rellena este campo</div>
       </div>
 
       <div className="container">

@@ -11,7 +11,7 @@ export const Modal = () => {
     <div
       className="modal fade"
       id="finishModal"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="finishModalLabel"
       aria-hidden="true"
     >

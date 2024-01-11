@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllTailors = async () => {
     const http = axios.create({
-        baseURL: "http://localhost:8088",
+        baseURL: "http://localhost:8762/sastreria-fitting",
         headers: {
         "Content-type": "application/json"
         },
@@ -10,6 +10,37 @@ export const getAllTailors = async () => {
         mode: "cors",
     });
     return await http.get("/tailor")
+    .then( (resp) => { return   resp.data })
+    .catch(e => {console.log(e); });
+}
+
+export const getATailors = async (idTailor) => {
+    let url = "/tailor/"+idTailor;
+    const http = axios.create({
+        baseURL: "http://localhost:8762/sastreria-fitting",
+        headers: {
+        "Content-type": "application/json"
+        },
+        responseType: "json",
+        mode: "cors"
+    });
+    return await http.get(url)
+    .then( (resp) => { return   resp.data })
+    .catch(e => {console.log(e); });
+   }
+
+
+export const addJob = async (newJob) => {
+    const http = axios.create({
+        baseURL: "http://localhost:8762/trabajo-fitting",
+        headers: {
+        "Content-type": "application/json"
+        },
+        responseType: "json",
+        mode: "cors",
+    });
+
+    return await http.post("/job", newJob)
     .then( (resp) => { return   resp.data })
     .catch(e => {console.log(e); });
    }
