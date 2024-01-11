@@ -26,15 +26,15 @@ export const ClientDetailsPage = () => {
   };
 
   // aqui se controla que solo haya un numero de pedido por item
-  const addNewItem = (itemName, number) => {
+  const addNewItem = (itemName, itemNumber) => {
     if (orderItem.find((it) => it.name == itemName)) {
-      orderItem.map((item) => {
+      orderItem?.map((item) => {
         if (item.name === itemName) {
-          item.total = number;
+          item.number = itemNumber;
         }
       });
     } else {
-      setOrderItem([...orderItem, { name: itemName, total: number }]);
+      setOrderItem([...orderItem, { name: itemName, number: itemNumber }]);
     }
   };
   // aqui se controla que solo haya un numero de pedido por item

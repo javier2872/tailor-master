@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavBar } from "../components/NavBar";
 import { useParams, useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import data from "../resources/tailor_data.json";
 import { useStorageMemory } from "../hooks/useStorageMemory";
 import {addJob}  from "../services/http.service";
+import { getATailors } from "../services/http.service";
 
 export const ClientSummaryPage = () => {
   //hook para el boton back
@@ -15,36 +16,51 @@ export const ClientSummaryPage = () => {
 
   // constantes que nos ayudaran a poder mostrar toda la información que necesitamos para mostrar el resumen de todo el pedido
   const { id } = useParams();
-  const itemsOrder = [];
-  const tailor = data.filter((item) => item.id == id).map((obj) => obj);
-  const tailorName = tailor.map((details) => details.name);
-  const tailorSpecialties = tailor.map((details) => details.specialties);
+  const [itemsOrder, setItemsOrder] = useState([]);
+  const [total, setTotal] = useState(0);
+  //obtener los datos un tailor en expecifico
+  const [tailor, setTailor] = useState([]);
+  const tailorName = tailor.name;
+  const tailorSpecialties = tailor.specialties;
   const dataStorage = JSON.parse(localStorage.getItem(id));
-  const date = []//dataStorage.filter((item) => item.date).map((obj) => obj.date);
-  const order = []//dataStorage.filter((item) => item.name);
-  var total = 0;
-  for (let i = 0; i < order.length; i++) {
-    for (let j = 0; j < tailorSpecialties[0].length; j++) {
-      if (tailorSpecialties[0][j].name === order[i].name) {
-        itemsOrder.push({
-          name: tailorSpecialties[0][j].name,
-          price: tailorSpecialties[0][j].price,
-          number: order[i].total,
-        });
-        total =
-          total +
-          parseInt(tailorSpecialties[0][j].price) * parseInt(order[i].total);
-      }
-    }
-  }
-  //Hook que vamos a utilizar para nuestro custom hook
-  const [customHook, setCustomHook] = useStorageMemory(id, "");
-  const handleClick = () => {
-    const dataStorage = JSON.parse(localStorage.getItem(id));
-    dataStorage?.push({ client: inputValue });
-    setCustomHook(dataStorage);
-    addJob(dataStorage);
-  };
+  const date = dataStorage.date;
+  const order = dataStorage.item;
+
+  useEffect(() => {
+    getATailors(id).then((d) => setTailor(d));
+    console.log(tailor);
+   
+  },[]);
+  useEffect(() => {
+    let itemsSelected=[];
+    let itemsTotal=0;
+    tailorSpecialties?.map((specialyService)=>{
+      order?.map((orderClient)=>{
+        if (specialyService.name === orderClient.name){
+          itemsSelected.push({
+            name: specialyService.name,
+            price: specialyService.price,
+            number: orderClient.number,
+          });
+
+          itemsTotal = itemsTotal + parseInt(specialyService.price) * parseInt(orderClient.number);
+        }
+      })
+    })
+    setItemsOrder(itemsSelected);
+    setTotal(itemsTotal);
+  },[tailor]);
+
+    //Hook que vamos a utilizar para nuestro custom hook
+    const [customHook, setCustomHook] = useStorageMemory(id, "");
+    const handleClick = () => {
+      const dataStorage = JSON.parse(localStorage.getItem(id));
+      dataStorage?.push({ client: inputValue });
+      setCustomHook(dataStorage);
+      addJob(dataStorage);
+    };
+
+  if (!tailor) return null;
 
   return (
     <div>
