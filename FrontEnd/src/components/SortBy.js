@@ -2,7 +2,7 @@ import React from "react";
 
 export const SortBy = ({ sortItems }) => {
   return (
-    <div className="form-floating">
+    <div id="sort_by" className="form-floating">
       <select
         defaultValue={"none"}
         className="form-select"

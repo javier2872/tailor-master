@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-export const NavBar = ({ children = "" ,title}) => {
+export const NavBar = ({ children = "", title }) => {
   // definimos esta constante, para comprobar en que path estamos
   const location = useLocation();
   // hook para controlar si enseñamos los boton de busqueda, ya que solo se muestran en la pantalla principal
@@ -14,13 +14,15 @@ export const NavBar = ({ children = "" ,title}) => {
   }, []);
 
   return (
-    <div>
+    <div id="nav_bar">
       <nav className="bg-light">
         <a className="navbar-brand fw-bold fs-1">FITTING</a>
       </nav>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand fw-bold fs-3">{title}</a>
+          <a id="tittle_nav_bar" className="navbar-brand fw-bold fs-3">
+            {title}
+          </a>
           <button
             className="navbar-toggler"
             type="button"

@@ -10,7 +10,7 @@ import { getATailors } from "../services/http.service";
 export const ClientDetailsPage = () => {
   //hook para el boton back
   const navigate = useNavigate();
- 
+
   const { id } = useParams();
   //obtener los datos un tailor en expecifico
   const [tailor, setTailor] = useState([]);
@@ -50,6 +50,7 @@ export const ClientDetailsPage = () => {
         idTailor: id,
         date: selectedDate,
         item: orderItem,
+        client: [],
       };
 
       localStorage.setItem(id, JSON.stringify(job));
@@ -65,26 +66,32 @@ export const ClientDetailsPage = () => {
   useEffect(() => {
     getATailors(id).then((d) => setTailor(d));
     console.log(tailor);
-  },[]);
+  }, []);
 
   if (!tailor) return null;
 
   return (
-    <div>
+    <div id="client_details_page">
       <NavBar title="Cliente"></NavBar>
-      <button className="btn btn-success" onClick={() => navigate(-1)}>
-        Go Back
+      <button
+        id="goBack_client_details_page"
+        className="btn btn-success"
+        onClick={() => navigate(-1)}
+      >
+        Regresar
       </button>
       <div className="container">
-          <div key={tailor.id}>
-            <div>Nombre del sastre: {tailor.name}</div>
-            <div>
-              <TablePrice
-                specialties={tailor.specialties}
-                addNewItem={addNewItem}
-              ></TablePrice>
-            </div>
+        <div key={tailor.id}>
+          <div id="tailorName_client_details_page">
+            Nombre del sastre: {tailor.name}
           </div>
+          <div>
+            <TablePrice
+              specialties={tailor.specialties}
+              addNewItem={addNewItem}
+            ></TablePrice>
+          </div>
+        </div>
       </div>
       <div className="container">
         <TableSchedule
@@ -94,12 +101,18 @@ export const ClientDetailsPage = () => {
       </div>
       <div className="container">
         {Object.keys(orderItem).length === 0 || selectedDate === "" ? (
-          <button type="button" className="btn btn-success" disabled={true}>
+          <button
+            id="buttonContractDisabled_client_details_page"
+            type="button"
+            className="btn btn-success"
+            disabled={true}
+          >
             Contratar Servicios
           </button>
         ) : (
           <Link to={`/client/${id}/summary`}>
             <button
+              id="buttonContract_client_details_page"
               type="button"
               className="btn btn-success"
               onClick={() => {

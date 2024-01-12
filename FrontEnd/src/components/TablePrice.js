@@ -24,7 +24,7 @@ export const TablePrice = ({ specialties, addNewItem }) => {
   }, [newItems]);
 
   return (
-    <table className="table table-success table-striped">
+    <table id="table_price" className="table table-success table-striped">
       <thead>
         <tr>
           <th scope="col">#</th>

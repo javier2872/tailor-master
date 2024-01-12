@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import data from "../resources/tailor_data.json";
 import { useStorageMemory } from "../hooks/useStorageMemory";
-import {addJob}  from "../services/http.service";
+import { addJob } from "../services/http.service";
 import { getATailors } from "../services/http.service";
 
 export const ClientSummaryPage = () => {
@@ -14,6 +14,8 @@ export const ClientSummaryPage = () => {
   //Bloquea el boton de finalizar pedido
   const [inputValue, setInputValue] = useState("");
 
+  //Hook que vamos a utilizar para nuestro custom hook
+  const [customHook, setCustomHook] = useStorageMemory(id, "");
   // constantes que nos ayudaran a poder mostrar toda la información que necesitamos para mostrar el resumen de todo el pedido
   const { id } = useParams();
   const [itemsOrder, setItemsOrder] = useState([]);
@@ -29,44 +31,50 @@ export const ClientSummaryPage = () => {
   useEffect(() => {
     getATailors(id).then((d) => setTailor(d));
     console.log(tailor);
-   
-  },[]);
+  }, []);
   useEffect(() => {
-    let itemsSelected=[];
-    let itemsTotal=0;
-    tailorSpecialties?.map((specialyService)=>{
-      order?.map((orderClient)=>{
-        if (specialyService.name === orderClient.name){
+    let itemsSelected = [];
+    let itemsTotal = 0;
+    tailorSpecialties?.map((specialyService) => {
+      order?.map((orderClient) => {
+        if (specialyService.name === orderClient.name) {
           itemsSelected.push({
             name: specialyService.name,
             price: specialyService.price,
             number: orderClient.number,
           });
 
-          itemsTotal = itemsTotal + parseInt(specialyService.price) * parseInt(orderClient.number);
+          itemsTotal =
+            itemsTotal +
+            parseInt(specialyService.price) * parseInt(orderClient.number);
         }
-      })
-    })
+      });
+    });
     setItemsOrder(itemsSelected);
     setTotal(itemsTotal);
-  },[tailor]);
+  }, [tailor]);
 
-    //Hook que vamos a utilizar para nuestro custom hook
-    const [customHook, setCustomHook] = useStorageMemory(id, "");
-    const handleClick = () => {
-      const dataStorage = JSON.parse(localStorage.getItem(id));
-      dataStorage?.push({ client: inputValue });
-      setCustomHook(dataStorage);
-      addJob(dataStorage);
+  const handleClick = () => {
+    const dataStorage = JSON.parse(localStorage.getItem(id));
+    let client = {
+      name: inputValue,
     };
+    dataStorage.client.push(client);
+    setCustomHook(dataStorage);
+    addJob(dataStorage);
+  };
 
   if (!tailor) return null;
 
   return (
-    <div>
-      <NavBar></NavBar>
-      <button className="btn btn-success" onClick={() => navigate(-1)}>
-        Go Back
+    <div id="client_summary_page">
+      <NavBar title="Cliente"></NavBar>
+      <button
+        id="goBack_client_summary_page"
+        className="btn btn-success"
+        onClick={() => navigate(-1)}
+      >
+        Regresar
       </button>
       <div className="container">
         <table className="table table-success table-striped">
@@ -78,11 +86,11 @@ export const ClientSummaryPage = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr id="nameTailor_client_summary_page">
               <th scope="col">Nombre</th>
               <th scope="col">{tailorName}</th>
             </tr>
-            <tr>
+            <tr id="orderTailor_client_summary_page">
               <th scope="col">Pedido</th>
               <th>
                 {itemsOrder?.map((specity, index) => (
@@ -93,11 +101,11 @@ export const ClientSummaryPage = () => {
                 ))}
               </th>
             </tr>
-            <tr>
+            <tr id="dateTailor_client_summary_page">
               <th scope="col">Fecha</th>
               <th scope="col">{date}</th>
             </tr>
-            <tr>
+            <tr id="totalTailor_client_summary_page">
               <th scope="col">Total</th>
               <th scope="col">{total}&#8364;</th>
             </tr>
@@ -111,7 +119,7 @@ export const ClientSummaryPage = () => {
         <input
           type="text"
           className="form-control"
-          id="name"
+          id="nameClient_client_summary_page"
           placeholder="Name"
           onChange={(e) => setInputValue(e.target.value)}
           required
@@ -122,7 +130,7 @@ export const ClientSummaryPage = () => {
 
       <div className="container">
         <button
-          id="button-finalizar"
+          id="buttonFinish_client_summary_page"
           type="button"
           className="btn btn-success"
           data-bs-toggle="modal"
