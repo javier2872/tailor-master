@@ -1,136 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { NavBar } from "../components/NavBar";
 import data from "../resources/tailor_data.json";
+import { getATailors } from "../services/http.service";
+import { ListFeaturesTailor } from "../components/ListFeaturesTailor";
 
 export const TailorPage = () => {
-  const [dataTailor, setDataTailor] = useState(data);
-
-  const [searchTailor, setSearchTailor] = useState(
-    JSON.parse(sessionStorage.getItem("tailor"))
-  );
-
+  // configuración del hooks useState
+  const [dataTailor, setDataTailor] = useState([]);
+  const [title, setTitle] = useState("");
   const [showTable, setShowTable] = useState(false);
 
-  const filteredTailors = dataTailor.find(
-    (tailor) =>
-      tailor.id.toString().toLowerCase() === searchTailor.toLowerCase()
-  );
-
-  const title = "Sastre: ID-" + JSON.parse(sessionStorage.getItem("tailor"));
+  useEffect(() => {
+    getATailors(JSON.parse(sessionStorage.getItem("tailor"))).then((d) =>
+      setDataTailor(d)
+    );
+  }, []);
 
   useEffect(() => {
-    filteredTailors ? setShowTable(!showTable) : setShowTable(showTable);
-  }, [filteredTailors]);
+    if (!dataTailor) {
+      setShowTable(!showTable);
+    } else {
+      setShowTable(showTable);
+      setTitle("Sastre: " + dataTailor.name);
+    }
+  }, [dataTailor]);
 
-  const Results = () => (
-    <div id="results" className="search-results">
-      <div className="container">
-        <table className="table table-success table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Trabajo</th>
-              <th scope="col">Precio (aproximado)</th>
-              <th scope="col">Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredTailors.specialties?.map((specity, index) => (
-              <tr key={specity.name}>
-                <th scope="row">{index}</th>
-                <td>{specity.name}</td>
-                <td>{specity.price}&#8364;</td>
-                <td>
-                  <button type="button" class="btn btn-dark">
-                    Editar
-                  </button>
-                  <button type="button" class="btn btn-dark">
-                    Borrar
-                  </button>
-                </td>
-              </tr>
-            ))}
-            <tr>
-              <th scope="row"></th>
-              <td>
-                {" "}
-                <input></input>
-              </td>
-              <td>
-                <input></input>
-              </td>
-              <td>
-                <button type="button" class="btn btn-dark">
-                  Añadir
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  if (!dataTailor)
+    return (
+      <div className="container alert alert-success" role="alert">
+        No existe usuario
       </div>
-      <div className="container">
-        <table className="table table-success table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Disponibilidad</th>
-              <th scope="col">Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredTailors.availability?.map((available, index) => (
-              <tr key={index}>
-                <th scope="row">{index}</th>
-                <td>{available}</td>
-                <td>
-                  <button type="button" class="btn btn-dark">
-                    Editar
-                  </button>
-                  <button type="button" class="btn btn-dark">
-                    Borrar
-                  </button>
-                </td>
-              </tr>
-            ))}
-            <tr>
-              <th scope="row"></th>
-              <th>
-                <input></input>
-              </th>
-              <th>
-                <button type="button" class="btn btn-dark">
-                  Añadir
-                </button>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className="container">
-        <table className="table table-success table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Trabajo</th>
-              <th scope="col">Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Trabajo</th>
-              <th scope="col">Fecha</th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+    );
 
   return (
     <section className="garamond">
-      <NavBar title= {title}></NavBar>
-      <div className="container">{showTable && <Results />}</div>
+      <NavBar title={title}></NavBar>
+      <div className="container">
+        {!showTable && <ListFeaturesTailor tailor={dataTailor}></ListFeaturesTailor>}
+      </div>
     </section>
   );
 };
