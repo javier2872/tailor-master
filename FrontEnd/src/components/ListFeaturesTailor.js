@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { CreateEspecialtyTailor } from "./CreateEspecialtyTailor";
+import { CreateSpecialityTailor } from "./CreateSpecialityTailor";
 import { EditSpecialityTailor } from "./EditSpecialityTailor";
 export const ListFeaturesTailor = ({ tailor }) => {
+
+  //state for type of service
+  const [tailorSpecialties, setTailorSpecialties] = useState(tailor.specialties);
+  //state for type of service
+  const [price, setPrice] = useState(0);
+
     return (           
 
         <div id="results" className="search-results">
@@ -25,7 +31,7 @@ export const ListFeaturesTailor = ({ tailor }) => {
                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editSpecialityTailor">
                       Editar
                     </button>
-                    <EditSpecialityTailor talorID={tailor.id} editSpeciality={speciality} allSpecialities={tailor.specialties}></EditSpecialityTailor>
+                    <EditSpecialityTailor talorID={tailor.id} editSpeciality={speciality} allSpecialities= {tailor.specialties} updateSpecialties ={ setTailorSpecialties}></EditSpecialityTailor>
                     <button type="button" class="btn btn-dark">
                       Borrar
                     </button>
@@ -37,10 +43,10 @@ export const ListFeaturesTailor = ({ tailor }) => {
                 <td> </td>
                 <td> </td>
                 <td>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createEspecialtyTailor">
+                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createSpecialityTailor">
                     Añadir
                   </button>
-                  <CreateEspecialtyTailor></CreateEspecialtyTailor>
+                  <CreateSpecialityTailor talorID={tailor.id} allSpecialities= {tailor.specialties} updateSpecialties ={ setTailorSpecialties}></CreateSpecialityTailor>
                 </td>
               </tr>
             </tbody>

@@ -1,14 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { updateATailors } from "../services/http.service";
 
-export const CreateEspecialtyTailor = () => {
+export const CreateSpecialityTailor = ( {talorID, allSpecialities, updateSpecialties} ) => {
   
   //state for type of service
   const [service, setService] = useState("");
   //state for type of service
   const [price, setPrice] = useState(0);
 
+  const clickHandler = (event) => {
+    event.preventDefault();
+    setPrice(parseInt(price));
+    if (service.length > 0 && price >= 0) {
+      allSpecialities.push({
+        name: service,
+        price: price,
+      });
+      let speciality = {
+        specialties: allSpecialities,
+      };
+      updateATailors(talorID, speciality);
+      updateSpecialties(speciality);
+    }
+  };
+
   return (
-          <div class="modal fade" id="createEspecialtyTailor" tabindex="-1" aria-labelledby="createEspecialtyTailorLabel" aria-hidden="true">
+          <div class="modal fade" id="createSpecialityTailor" tabindex="-1" aria-labelledby="createSpecialityTailorLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -38,7 +55,7 @@ export const CreateEspecialtyTailor = () => {
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" className="btn btn-dark">
+                  <button type="button" className="btn btn-dark"  onClick={clickHandler} data-bs-dismiss="modal">
                     Guardar
                   </button>
                   <button
