@@ -5,7 +5,7 @@ export const EditSpecialityTailor = ({
   talorID,
   editSpeciality,
   allSpecialities,
-  updateSpecialties
+  updateSpecialties,
 }) => {
   const [service, setService] = useState(editSpeciality["name"]);
   //state for type of service

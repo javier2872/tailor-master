@@ -47,7 +47,7 @@ export const ListFeaturesTailor = ({ tailor }) => {
     //window.location.reload();
   };
   return (
-    <div id="results" className="search-results">
+    <div id="table_List_Features_Tailor" className="search-results">
       <div className="container">
         <table className="table table-success table-striped">
           <thead>
@@ -95,6 +95,7 @@ export const ListFeaturesTailor = ({ tailor }) => {
               <td> </td>
               <td>
                 <button
+                  id="addSpeciality_List_Features_Tailor"
                   type="button"
                   class="btn btn-dark"
                   data-bs-toggle="modal"
@@ -156,6 +157,7 @@ export const ListFeaturesTailor = ({ tailor }) => {
               <th></th>
               <th>
                 <button
+                  id="addAvailability_List_Features_Tailor"
                   type="button"
                   class="btn btn-dark"
                   data-bs-toggle="modal"

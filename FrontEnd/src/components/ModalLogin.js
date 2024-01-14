@@ -13,7 +13,7 @@ export const ModalLogin = (props) => {
   };
 
   return (
-    <div open={showModal}>
+    <div id="modal_login" open={showModal}>
       <div className="modal-dialog modal-sm">
         <div className="modal-content">
           <div className="modal-header">
@@ -26,7 +26,7 @@ export const ModalLogin = (props) => {
                 className="form-control"
                 placeholder="ID de sastre"
                 type="text"
-                id="inputSastre"
+                id="idTailor_modal_login"
                 onChange={(e) => setTailor(e.target.value)}
               />
             </div>
@@ -34,6 +34,7 @@ export const ModalLogin = (props) => {
           <div className="modal-footer">
             <Link to={`/tailor`}>
               <button
+                id="buttonSubmit_modal_login"
                 type="submit"
                 onClick={() => {
                   handleClick();
@@ -43,7 +44,7 @@ export const ModalLogin = (props) => {
               </button>
             </Link>
             <button
-              id="btnHideModal"
+              id="buttonHideModal_modal_login"
               type="button"
               onClick={() => setShowModal(!showModal)}
             >
