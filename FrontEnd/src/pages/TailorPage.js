@@ -25,8 +25,8 @@ export const TailorPage = () => {
     } else {
       setShowTable(showTable);
       setTitle("Sastre: " + dataTailor.name);
+      allJobsATailor(dataTailor.id).then((d) => setJobTailor(d));
     }
-    allJobsATailor(dataTailor.id).then((d) => setJobTailor(d));
   }, [dataTailor]);
 
   if (!dataTailor)
