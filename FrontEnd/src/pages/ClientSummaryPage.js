@@ -13,11 +13,11 @@ export const ClientSummaryPage = () => {
 
   //Bloquea el boton de finalizar pedido
   const [inputValue, setInputValue] = useState("");
-
-  //Hook que vamos a utilizar para nuestro custom hook
-  const [customHook, setCustomHook] = useStorageMemory(id, "");
   // constantes que nos ayudaran a poder mostrar toda la información que necesitamos para mostrar el resumen de todo el pedido
   const { id } = useParams();
+  //Hook que vamos a utilizar para nuestro custom hook
+  const [customHook, setCustomHook] = useStorageMemory(id, "");
+
   const [itemsOrder, setItemsOrder] = useState([]);
   const [total, setTotal] = useState(0);
   //obtener los datos un tailor en expecifico
@@ -134,7 +134,7 @@ export const ClientSummaryPage = () => {
           type="button"
           className="btn btn-success"
           data-bs-toggle="modal"
-          data-bs-target="#finishModal"
+          data-bs-target="#modal_finish"
           disabled={inputValue.length === 0}
           onClick={() => {
             handleClick();

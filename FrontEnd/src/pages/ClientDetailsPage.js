@@ -81,7 +81,7 @@ export const ClientDetailsPage = () => {
         Regresar
       </button>
       <div className="container">
-        <div key={tailor.id}>
+        <div key={id}>
           <div id="tailorName_client_details_page">
             Nombre del sastre: {tailor.name}
           </div>

@@ -16,6 +16,11 @@ export const ListFeaturesTailor = ({ tailor }) => {
     tailor.availability
   );
 
+  useEffect(() => {
+    setTailorSpecialties(tailorSpecialties);
+    setTailorAvailabilities(tailorAvailabilities);
+  }, [tailorSpecialties, tailorAvailabilities ]);
+
   const clickDeleteSpecialtyHandler = (deleteSpeciality) => {
     let deletedSpeciality = tailor.specialties.filter(
       (e) => e != deleteSpeciality
@@ -39,7 +44,7 @@ export const ListFeaturesTailor = ({ tailor }) => {
     updateATailors(tailor.id, UpdatedAvailability);
     setTailorAvailabilities(deletedAvailability);
     //carga la pagina despues de borrar
-    window.location.reload();
+    //window.location.reload();
   };
   return (
     <div id="results" className="search-results">
@@ -164,24 +169,6 @@ export const ListFeaturesTailor = ({ tailor }) => {
                   updateAvailabilities={setTailorAvailabilities}
                 ></CreateAvailabilityTailor>
               </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className="container">
-        <table className="table table-success table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Trabajo</th>
-              <th scope="col">Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Trabajo</th>
-              <th scope="col">Fecha</th>
             </tr>
           </tbody>
         </table>
