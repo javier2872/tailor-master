@@ -114,13 +114,13 @@ export const ClientSummaryPage = () => {
       </div>
       <div className="was-validated container">
         <label htmlFor="name" className="form-label">
-          Name Client
+          Nombre del cliente
         </label>
         <input
           type="text"
           className="form-control"
           id="nameClient_client_summary_page"
-          placeholder="Name"
+          placeholder="Nombre"
           onChange={(e) => setInputValue(e.target.value)}
           required
         />
