@@ -3,14 +3,14 @@ import React, { useState, useEffect, useRef } from "react";
 // extraemos la propiedad specialties
 export const TablePrice = ({ specialties, addNewItem }) => {
   // donde guardaremos el numero de items que queremos
-  const [newItems, setNewItems] = useState({ name: "", total: "0" });
+  const [newItems, setNewItems] = useState({ name: "", number: "0" });
 
   //para no ejecutar el useEffect en la primera renderización y asi no guardar el primer estado en memoria
   const isFirstRender = useRef(true);
 
   //guardamos cuando se produzca un cambio en el pedido
   const handleChange = (ev) => {
-    const items1 = { name: ev.target.id, total: ev.target.value };
+    const items1 = { name: ev.target.id, number: ev.target.value };
     setNewItems(items1);
   };
 
@@ -20,11 +20,11 @@ export const TablePrice = ({ specialties, addNewItem }) => {
       isFirstRender.current = false;
       return;
     }
-    addNewItem(newItems.name, newItems.total);
+    addNewItem(newItems.name, newItems.number);
   }, [newItems]);
 
   return (
-    <table className="table table-success table-striped">
+    <table id="table_price" className="table table-success table-striped">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -42,7 +42,7 @@ export const TablePrice = ({ specialties, addNewItem }) => {
             <td>
               <select
                 id={specity.name}
-                defaultValue={newItems.total}
+                defaultValue={newItems.number}
                 className="form-select"
                 aria-label="Default select example"
                 onChange={(ev) => handleChange(ev)}

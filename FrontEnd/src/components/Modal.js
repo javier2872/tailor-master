@@ -10,35 +10,32 @@ export const Modal = () => {
   return (
     <div
       className="modal fade"
-      id="finishModal"
-      tabindex="-1"
+      id="modal_finish"
+      tabIndex="-1"
       aria-labelledby="finishModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header bg-success text-light bg-opacity-50r">
-            <h5 className="modal-title">Pedido Tramitando</h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <h5 id="title_modal_finish" className="modal-title">
+              Pedido Tramitando
+            </h5>
           </div>
-          <div className="modal-body">
+          <div id="body_modal_finish" className="modal-body">
             <p>Gracias por confiar en nosotros.</p>
-            <p>En breves recibirá, más información.</p>
+            <p>En breve recibirá más información.</p>
           </div>
           <div className="modal-footer">
             <Link to={`/`}>
               <button
+                id="button_submit_modal_finish"
                 type="button"
                 onClick={() => handleClick()}
                 className="btn btn-success font-weight-bold"
                 data-bs-dismiss="modal"
               >
-                Ir
+                Aceptar
               </button>
             </Link>
           </div>

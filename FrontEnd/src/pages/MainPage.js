@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ModalLogin } from "../components/ModalLogin";
 
 export const MainPage = () => {
+  const [showModal, setShowModal] = useState(false);
+  const toggleOpen = () => setShowModal(!showModal);
   return (
-    <div className="card card-main text-center">
+    <div id="main_page" className="card card-main text-center">
       <div className="card-header text-light">
         <h5>Fitting</h5>
       </div>
@@ -11,13 +14,14 @@ export const MainPage = () => {
         <form>
           <div className="mb-3">
             <Link to={`/client`}>
-              <button>Cliente</button>
+              <button id="buttonClient_main_page">Cliente</button>
             </Link>
           </div>
           <div className="mb-3">
-            <Link to={`/tailor`}>
-              <button>Sastre/a</button>
-            </Link>
+            <button type="button" id="button-login-tailor" onClick={toggleOpen}>
+              Sastre/a
+            </button>
+            {showModal && <ModalLogin functions={[showModal, setShowModal]} />}
           </div>
         </form>
       </div>
