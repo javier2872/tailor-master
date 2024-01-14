@@ -1,0 +1,19 @@
+		{
+		    "name":"Tailor Prueba",
+		    "description":"Se me da muy bien hacer pantalones",
+		    "specialties":[
+		        {
+		            "name":"Bajos pantalon",
+		            "price":"9"
+		        },
+		        {
+		            "name":"Bajos falda",
+		            "price":"10"
+		        },
+		        {
+		            "name":"cremallera",
+		            "price":"7"
+		        }
+		    ],
+		        "availability":["13-05-2023", "20/05/2023"]
+		}

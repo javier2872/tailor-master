@@ -49,7 +49,7 @@ export const ListFeaturesTailor = ({ tailor }) => {
   return (
     <div id="table_List_Features_Tailor" className="search-results">
       <div className="container">
-        <table className="table table-success table-striped">
+        <table  id="table_specialities_List_Features_Tailor" className="table table-success table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -114,7 +114,7 @@ export const ListFeaturesTailor = ({ tailor }) => {
         </table>
       </div>
       <div className="container">
-        <table className="table table-success table-striped">
+        <table id="table_availabilty_List_Features_Tailor" className="table table-success table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
