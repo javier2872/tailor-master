@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions;
         // the paths of the features files
         features = {"src/test/resources/features"},
         // the paths of the step definition files
-        glue = {"stepsDefinitions"},
+        glue = {"endtoend/stepsDefinitions"},
         //which tags in feature file should execute
         tags = "@All_Tests",
         // its mean that the console output for cucumber test are much more

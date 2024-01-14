@@ -3,6 +3,8 @@ package endtoend.pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageSummaryClient {
     private final WebDriver driver;
@@ -58,7 +60,9 @@ public class PageSummaryClient {
     	return element.isDisplayed();
     }
     public void clickButtonFinishModal() {
-    	WebElement element = this.driver.findElement(BUTTON_ACCEPT);
+    	java.time.Duration timeW= java.time.Duration.ofSeconds((long)5);
+    	WebDriverWait wait = new WebDriverWait(this.driver,timeW );
+    	WebElement element = wait.until(ExpectedConditions.elementToBeClickable(BUTTON_ACCEPT));
     	element.click();
     } 
 }

@@ -1,6 +1,7 @@
 package endtoend.pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -14,16 +15,17 @@ public class PageClientMain {
     
     public boolean checkExistCard(String nameTailor) {
     	try {
-    		By.xpath("//*[@id='client_Mainpage_page']/descendant:: *[contains(text(),'/"+nameTailor+"/')]");
+    		By.xpath("//*[@id='client_Mainpage_page']/descendant:: *[contains(text(),'"+nameTailor+"')]");
         	return true;
     	}catch(Exception e) {
     		return false;
     	}    	
     }
-    public void pushButtonDetails(String nameTailor) {
-		By cardTailor = By.xpath("//*[@id='client_Mainpage_page']/descendant:: *[contains(text(),'/"+nameTailor+"/')]/ancestor:: *[contains(@class, 'content-card')]/descendant:: *[contains(@class, 'btn')] ");
+    public void pushButtonDetails(String idTailor) {
+		By cardTailor = By.xpath("//*[@id='client_Mainpage_page']/descendant:: *[@id='"+idTailor+"'] ");
 		WebElement element = this.driver.findElement(cardTailor);
-    	element.click();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    	//element.click();
     }
 }
 

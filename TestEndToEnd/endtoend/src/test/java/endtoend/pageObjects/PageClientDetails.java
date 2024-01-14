@@ -29,7 +29,7 @@ public class PageClientDetails {
     }
     
     public void selectAvailability(String availability) {
-    	By selectAvailability = By.xpath("//*[@id='table_schedule']/descendant:: input[contains(@value,'/"+availability+"/')]"); 
+    	By selectAvailability = By.xpath("//*[@id='table_schedule']/descendant:: input[contains(@value,'"+availability+"')]"); 
     	WebElement element = this.driver.findElement(selectAvailability);
     	element.click();
     }
@@ -37,6 +37,10 @@ public class PageClientDetails {
     public void buttonOrderClick() {
     	WebElement element = this.driver.findElement(BUTTON_ORDER);
     	element.click();
+    }
+    public boolean buttonOrderIsVisible() {
+    	WebElement element = this.driver.findElement(BUTTON_ORDER);
+    	return element.isDisplayed();
     }
     
     public boolean buttonOrderDisabledIsVisible() {

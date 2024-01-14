@@ -17,7 +17,7 @@ export const Card = ({ id, name, description }) => {
         </div>
       </div>
       <Link to={`/client/${id}`} className="text-center">
-        <p className="btn btn-success">Detalles</p>
+        <p id= {id} className="btn btn-success">Detalles</p>
       </Link>
     </div>
   );
