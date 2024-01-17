@@ -3,7 +3,7 @@ Feature: Create a job and check the job creation
   I want, as a client, to order a new job
   I want, as a tailor, to check this order
 
-  @test_fullFeature
+  @test_job
   Scenario: Create and check job
     Given I create a test tailor 
     And I navigate to "http://localhost:3000/"
